@@ -6,8 +6,9 @@ import { ActionsContainer, DescriptionData, DetailsContainer, ImageCover, MovieD
 export const MoviePage = () => {
     const nav = useNavigate()
     const movieId = useParams().id
-    const [moviesList, addMovieToList, removeMovieOfList] = useContext(MovieListContext)
-    const movie = moviesList.filter(movie => movie.id == movieId)[0]
+    const [moviesState, moviesDispatch] = useContext(MovieListContext)
+
+    const movie = moviesState.filter(movie => movie.id == movieId)[0]
 
     return (
         <MovieDetailsContainer>
@@ -36,7 +37,7 @@ export const MoviePage = () => {
 
                         <RemoveButton onClick={() => {
                             nav('/')
-                            removeMovieOfList(movie.id)
+                            moviesDispatch({type: 'removeMovie', id: movie.id})
                         }}>
                             Remover
                         </RemoveButton>
