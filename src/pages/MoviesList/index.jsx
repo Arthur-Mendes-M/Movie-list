@@ -7,17 +7,17 @@ import { MovieCard } from "../../components/MovieCard"
 import { RowCardList } from "./styles"
 
 export const MoviesListPage = () => {
-    const [moviesList, addMovieToList, removeMoveOfList] = useContext(MovieListContext)
-    const reversedMoviesList = moviesList.slice().reverse()
+    const [moviesState, moviesDispatch] = useContext(MovieListContext)
+    const reversedMoviesList = moviesState.slice().reverse()
     const [filtered, setFiltered] = useState(false)
-    const currentMoviesList = filtered ? reversedMoviesList : moviesList
+    const currentMoviesList = filtered ? reversedMoviesList : moviesState
 
     return (
         <main>
             <h1 className="title">Catálogo de filmes</h1>
 
             <ContentContainer title="Cadastro">
-                <MovieForm actionOnSubmit={addMovieToList}>
+                <MovieForm actionOnSubmit={(movie) => moviesDispatch({type: 'addMovie', movie: movie})}>
                     <Field>
                         <label htmlFor="title">Título</label>
                         <input type="text" id="title" required autoFocus placeholder="Ex: Interstellar"/>
@@ -56,7 +56,7 @@ export const MoviesListPage = () => {
                                     id={movie.id} 
                                     title={movie.title} 
                                     cover={movie.cover} 
-                                    action={() => removeMoveOfList(movie.id)}
+                                    action={() => moviesDispatch({type: 'removeMovie', id: movie.id})}
                                 />
                             )
                         : <p className="defaultMessage">🤔 Ainda não existe nenhum filme catalogado. Teste cadastrar um no furmuláiro a cima.</p>

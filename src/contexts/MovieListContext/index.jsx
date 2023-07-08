@@ -1,34 +1,39 @@
-import { createContext } from "react";
-import { useState } from "react"
-import { movieInterface } from "../interfaces/movieInterface";
-
+import { createContext, useReducer } from "react";
 export const MovieListContext = createContext([])
 
-export const MovieListProvider = ({children}) => {
-    const [moviesList, setMoviesList] = useState(JSON.parse(localStorage.getItem("movieList")) ?? [])
+const reducer = (state, action) => {
+    let finalState = state;
 
-    const addMovieToList = (movie) => {
-        const currentMovie = {...movieInterface, ...movie}
+    switch (action.type) {
+        case 'addMovie':
+            finalState = [
+                ...state,
+                action.movie
+            ]
 
-        setMoviesList(prev => {
-            const updatedList = [...prev, currentMovie]
+            break;
+        case 'removeMovie':
+            finalState = state.filter(movie => movie.id !== action.id)
+
+            break;
+        case 'updateMovie':
+            console.log(action.id)
+            console.log(action.movie)
             
-            localStorage.setItem("movieList", JSON.stringify(updatedList))
-            return updatedList
-        })
-    } 
-
-    const removeMoveOfList = (moveId) => {
-        setMoviesList(prev => {
-            const updatedList = prev.filter(movie => movie.id != moveId)
-
-            localStorage.setItem("movieList", JSON.stringify(updatedList))
-            return updatedList
-        })
+            break;
+        default:
+            throw Error("Action unknown");
     }
 
+    localStorage.setItem("movieList", JSON.stringify(finalState))
+    return finalState
+}
+
+export const MovieListProvider = ({children}) => {
+    const [moviesState, moviesDispatch] = useReducer(reducer, JSON.parse(localStorage.getItem("movieList")) ?? [])
+
     return (
-        <MovieListContext.Provider value={[moviesList, addMovieToList, removeMoveOfList]}>
+        <MovieListContext.Provider value={[moviesState, moviesDispatch]}>
             {children}
         </MovieListContext.Provider>
     )
