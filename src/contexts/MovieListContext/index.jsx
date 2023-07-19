@@ -17,9 +17,12 @@ const reducer = (state, action) => {
 
             break;
         case 'updateMovie':
-            console.log(action.id)
-            console.log(action.movie)
-            
+            var targetIndex = finalState.indexOf(state.filter(movie => movie.id == action.id)[0])
+            var newListedMovies = [...finalState]
+            newListedMovies.splice(targetIndex, 1, {...action.movie})
+
+            finalState = newListedMovies
+
             break;
         default:
             throw Error("Action unknown");
@@ -30,10 +33,10 @@ const reducer = (state, action) => {
 }
 
 export const MovieListProvider = ({children}) => {
-    const [moviesState, moviesDispatch] = useReducer(reducer, JSON.parse(localStorage.getItem("movieList")) ?? [])
+    const [movies, moviesDispatch] = useReducer(reducer, JSON.parse(localStorage.getItem("movieList")) ?? [])
 
     return (
-        <MovieListContext.Provider value={[moviesState, moviesDispatch]}>
+        <MovieListContext.Provider value={[movies, moviesDispatch]}>
             {children}
         </MovieListContext.Provider>
     )

@@ -2,42 +2,28 @@ import { useContext, useState } from "react"
 import { MovieListContext } from "../../contexts/MovieListContext"
 import { MovieForm } from "../../components/Form"
 import { ContentContainer } from "../../components/Section"
-import { Field, FieldInline} from "../../components/Form/styles"
 import { MovieCard } from "../../components/MovieCard"
 import { RowCardList } from "./styles"
 
 export const MoviesListPage = () => {
-    const [moviesState, moviesDispatch] = useContext(MovieListContext)
-    const reversedMoviesList = moviesState.slice().reverse()
+    const [movies, moviesDispatch] = useContext(MovieListContext)
+    const reversedMoviesList = movies.slice().reverse()
     const [filtered, setFiltered] = useState(false)
-    const currentMoviesList = filtered ? reversedMoviesList : moviesState
+    const currentMoviesList = filtered ? reversedMoviesList : movies
 
     return (
         <main>
             <h1 className="title">Catálogo de filmes</h1>
 
             <ContentContainer title="Cadastro">
-                <MovieForm actionOnSubmit={(movie) => moviesDispatch({type: 'addMovie', movie: movie})}>
-                    <Field>
-                        <label htmlFor="title">Título</label>
-                        <input type="text" id="title" required autoFocus placeholder="Ex: Interstellar"/>
-                    </Field>
-
-                    <Field>
-                        <label htmlFor="date">Data do lançamento</label>
-                        <input type="date" id="date" required />
-                    </Field>
-
-                    <Field>
-                        <label htmlFor="cover">Cartaz</label>
-                        <input type="text" id="cover" required placeholder="https://image-link..." />
-                    </Field>
-
-                    <FieldInline>
-                        <label htmlFor="description">Descrição</label>
-                        <textarea id="description" rows="5" maxLength={380} required placeholder="Filme incrível"></textarea>
-                    </FieldInline>
-                </MovieForm>
+                <MovieForm 
+                    actionOnSubmit={
+                        {
+                            action: 'create', 
+                            callback: (movie) => moviesDispatch({type: 'addMovie', movie: movie})
+                        }
+                    }
+                ></MovieForm>
             </ContentContainer>
 
             <ContentContainer title="Lista de filmes cadastrados">
