@@ -85,10 +85,10 @@
   <div align="right"><a href="#about">🔝</a></div>  
 </h2>
 
-<div>
-  <video src="./public/githubAssets/media/preview.mov">
-  Sorry, your browser not support embed videos, but you can <a href="./public/githubAssets/media/preview.mov" controls>download</a> and watch on your favorite media player!
-  </video>
+<div>  
+
+https://github.com/Arthur-Mendes-M/Movie-list/assets/75858153/3da6821d-6f94-40ee-9003-b06aef1f6d12
+
 </div>
 
 <br />
