@@ -56,7 +56,7 @@ export const MoviePage = () => {
                     {
                         formPopup && (
                             <PopupContainer>
-                                <button type="button" onClick={() => setFormPopup(prev => !prev)}>Close</button>
+                                <button type="button" onClick={() => setFormPopup(prev => !prev)}>Fechar formulário</button>
                                 
                                 <MovieForm 
                                     actionName="Atualizar" 

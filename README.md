@@ -1,4 +1,4 @@
-<img src="./githubAssets/logoAzul.svg" alt="Personal logo" id="about" width="60" />
+<img src="./public/githubAssets/logoAzul.svg" alt="Personal logo" id="about" width="60" />
 <h1>Movie list app</h1>
 
 <p>This is a personal project when you to use for save your favorite movie, with title, description, poster... </p>
@@ -86,21 +86,9 @@
 </h2>
 
 <div>
-  <figure>
-    <img alt="Design photo" src="https://source.unsplash.com/random"/>
-    <figcaption>
-      <h4 align="center">Screen title</h4>
-      <p>Screen description</p>
-    </figcaption>
-  </figure>
-
-  <figure>
-    <img alt="Design photo" src="https://source.unsplash.com/random"/>
-    <figcaption>
-      <h4 align="center">Screen title</h4>
-      <p>Screen description</p>
-    </figcaption>
-  </figure>
+  <video src="./public/githubAssets/media/preview.mov">
+  Sorry, your browser not support embed videos, but you can <a href="./public/githubAssets/media/preview.mov" controls>download</a> and watch on your favorite media player!
+  </video>
 </div>
 
 <br />
@@ -171,7 +159,7 @@
 </h2>
 
 <div align="center"><br/>
-  <img src="./githubAssets/profilePhoto.png" alt="Autor: Arthur Mendes" width="130" />
+  <img src="./public/githubAssets/profilePhoto.png" alt="Autor: Arthur Mendes" width="130" />
 
   <br />
 
