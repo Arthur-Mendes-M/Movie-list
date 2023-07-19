@@ -11,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
 
         transition: all .20s linear;
 
-        font-family: fantasy;
+        font-family: 'Courier New', Courier, monospace;
     }
 
     body {
